@@ -1,0 +1,17 @@
+{
+  "name": "uxn",
+  "module": "index.ts",
+  "type": "module",
+  "scripts": {
+    "bf": "bun run bf/index.ts --watch"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "prettier": "^3.2.5"
+  }
+}
