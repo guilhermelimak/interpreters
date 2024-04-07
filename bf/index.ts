@@ -1,7 +1,7 @@
 import chalk from "chalk";
 const instructions = [">", "<", ".", ",", "+", "-", "[", "]"];
 
-type BfState = {
+export type BfState = {
   memory: Uint8Array;
   ap: number;
   pc: number;
@@ -9,7 +9,7 @@ type BfState = {
   program: string[];
 };
 
-type BfIterator = {
+export type BfIterator = {
   next: () => BfIterator;
   done: boolean;
   value: BfState;

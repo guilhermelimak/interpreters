@@ -1,5 +1,5 @@
 import chalk from "chalk";
-import { bf, printMemory } from ".";
+import { bf, printMemory, type BfState, type BfIterator } from ".";
 import blessed from "blessed";
 
 const prog = `>++++++++[-<+++++++++>]<.>>+>-[+]++
@@ -7,7 +7,8 @@ const prog = `>++++++++[-<+++++++++>]<.>>+>-[+]++
   +++..+++.>-.<<+[>[+>+]>>]<---------
   -----.>>.+++.------.--------.>+.>+.
       `;
-// // 99 Beers?
+
+// 99 Beers?
 // const prog = `>++++++++++[<++++++++++>-]<->>>>>+++[>+++>+++<<-]<<<<+<[>[>+
 // >+<<-]>>[-<<+>>]++++>+<[-<->]<[[-]>>-<<]>>[[-]<<+>>]<<[[-]>>
 // >>>>[[-]<++++++++++<->>]<-[>+>+<<-]>[<+>-]+>[[-]<->]<<<<<<<<
@@ -96,10 +97,13 @@ const { next } = bf({
 });
 
 let prevMem: Uint8Array;
+let result: BfIterator;
+
 setInterval(async () => {
+  result = next();
   const {
     value: { memory, ap, pc, output, program },
-  } = next();
+  } = result;
 
   if (!Bun.deepEquals(memory, prevMem)) {
     memoryBox.content = printMemory(memory, ap);
@@ -110,4 +114,4 @@ setInterval(async () => {
     .join("");
   outputBox.content = output;
   screen.render();
-}, 30);
+}, 20);
